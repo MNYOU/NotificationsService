@@ -13,7 +13,7 @@ internal static class MapperExtensions
     
     public static SendMessage ToApplicationMessage(this SendMessageRequest request)
     {
-        var attachments = request.Attachments.ToApplicationAttachments();
+        var attachments = request.Attachments.ToApplicationAttachments().ToList();
         return new SendMessage()
         {
             Attachments = attachments,

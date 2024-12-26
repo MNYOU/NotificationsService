@@ -27,10 +27,6 @@ public sealed class SendService(IOptions<EmailSettings> settingProvider) : ISend
             result = Error.BadRequest($"Ошибка при отправке сообщения пользователю {emailMessage.Recipient} " +
                                       $"с заголовком {emailMessage.Title} и телом {emailMessage.Content} {ex.Message}");
         }
-        finally
-        {
-            await client.DisconnectAsync(true);
-        }
 
         return result;
     }
@@ -45,11 +41,11 @@ public sealed class SendService(IOptions<EmailSettings> settingProvider) : ISend
             results.Add(sendResult);
         }
 
-        await client.DisconnectAsync(true);
         return BatchOperationResult<SendMessage>.FromOperationResults(results);
     }
 
-    private async Task<OperationResult<SendMessage>> SendSingleFromBulkAsync(SendMessage emailMessage, SmtpClient client)
+    private async Task<OperationResult<SendMessage>> SendSingleFromBulkAsync(SendMessage emailMessage,
+        SmtpClient client)
     {
         using var message = GetMimeMessage(emailMessage);
         try
