@@ -13,6 +13,7 @@ public class Startup(IConfiguration configuration)
 
         services.AddEndpointsApiExplorer();
         services.AddControllers();
+        services.AddSwaggerGen();
 
         services.AddCors(options =>
         {
