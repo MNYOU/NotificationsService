@@ -9,7 +9,7 @@ public class Startup(IConfiguration configuration)
         services.AddHttpContextAccessor();
         services.AddProblemDetails();
         services.AddRouting(options => { options.LowercaseUrls = true; });
-
+        services.AddSwaggerGen();
         services.AddEndpointsApiExplorer();
         services.AddControllers();
 
