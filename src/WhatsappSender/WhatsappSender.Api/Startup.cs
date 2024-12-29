@@ -1,4 +1,5 @@
-﻿using WhatsappSender.SendLogic.Extensions;
+﻿using WhatsappSender.Api.Subscriptions;
+using WhatsappSender.SendLogic.Extensions;
 
 namespace WhatsappSender.Api;
 
@@ -26,6 +27,7 @@ public class Startup(IConfiguration configuration)
         services.AddHttpLogging(_ => { });
         services.AddLogging(config => config.AddConsole());
         services.AddSendLogic(configuration);
+        services.AddScoped<IRabbitMqSubscriber, RabbitMqSubscriber>();
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
