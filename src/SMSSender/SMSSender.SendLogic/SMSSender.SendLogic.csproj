@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Library</OutputType>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Content Remove="C:\Users\denis\.nuget\packages\smsc\1.0.9\contentFiles\any\net8.0\smsc_logo.ico" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Models\DTO\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\SMSSender.Core\SMSSender.Core.csproj" />
+      <ProjectReference Include="..\SMSSender.Domain\SMSSender.Domain.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0" />
+      <PackageReference Include="Microsoft.Extensions.Options" Version="9.0.0" />
+      <PackageReference Include="NotiSendDotNet" Version="1.0.1" />
+      <PackageReference Include="SMSC" Version="1.0.9" />
+    </ItemGroup>
+
+</Project>
