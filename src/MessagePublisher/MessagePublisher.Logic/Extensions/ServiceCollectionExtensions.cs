@@ -12,7 +12,7 @@ public static class ServiceCollectionExtensions
     {
         services.AddScoped<IPublisherService, PublisherService>();
         services.AddScoped<ISendManager, SendManager>();
-        
+
         return services;
     }
 }

@@ -1,19 +1,16 @@
-using MessagePublisher.Logic.Extensions;
-using MessagePublisher.Logic.Models.Options;
+namespace MessagePublisher.Api;
 
-var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-builder.Services.Configure<RabbitMqOption>(builder.Configuration.GetSection(nameof(RabbitMqOption)));
-builder.Services.AddPublisherServices();
-var app = builder.Build();
-
-if (app.Environment.IsDevelopment())
+public class Program
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    public static async Task Main(string[] args)
+    {
+        var host = CreateHostBuilder(args).Build();
+        await host.RunAsync();
+    }
+
+    private static IHostBuilder CreateHostBuilder(string[] args)
+    {
+        return Host.CreateDefaultBuilder(args)
+            .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
+    }
 }
-
-app.UseHttpsRedirection();
-
-app.Run();
