@@ -28,6 +28,7 @@ public class Startup(IConfiguration configuration)
         services.AddLogging(config => config.AddConsole());
         services.Configure<RabbitMqOption>(configuration.GetSection(nameof(RabbitMqOption)));
         services.AddPublisherServices();
+        services.AddSingleton<IHostedService, PublisherServiceInitializer>();
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
