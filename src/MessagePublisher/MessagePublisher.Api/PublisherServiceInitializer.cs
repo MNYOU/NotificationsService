@@ -2,15 +2,21 @@
 
 namespace MessagePublisher.Api;
 
-public class PublisherServiceInitializer(IPublisherService publisherService) : IHostedService
+public class PublisherServiceInitializer(IEnumerable<IPublisherService> publisherService) : IHostedService
 {
     public async Task StartAsync(CancellationToken cancellationToken)
     {
-        await publisherService.StartAsync();
+        foreach (var service in publisherService)
+        {
+            await service.StartAsync();
+        }
     }
 
     public async Task StopAsync(CancellationToken cancellationToken)
     {
-        await publisherService.StopAsync();
+        foreach (var service in publisherService)
+        {
+            await service.StopAsync();
+        }
     }
 }

@@ -10,11 +10,11 @@ using Microsoft.Extensions.Options;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 
-namespace MessagePublisher.Logic.Services;
+namespace MessagePublisher.Logic.Services.Base;
 
-public class PublisherService : IPublisherService, IAsyncDisposable
+public abstract class BasePublisherService : IPublisherService, IAsyncDisposable
 {
-    private const string QueueName = "messages";
+    internal virtual string QueueName { get; }
     private readonly string hostName;
     private readonly IConnectionFactory connectionFactory;
     private readonly ConcurrentDictionary<string, TaskCompletionSource<string>> callbackMapper = new();
@@ -22,7 +22,7 @@ public class PublisherService : IPublisherService, IAsyncDisposable
     private IChannel? channel;
     private string? replyQueueName;
 
-    public PublisherService(IOptions<RabbitMqOption> options)
+    internal BasePublisherService(IOptions<RabbitMqOption> options)
     {
         hostName = options.Value.HostName;
         connectionFactory = new ConnectionFactory { HostName = hostName };

@@ -10,7 +10,10 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddPublisherServices(this IServiceCollection services)
     {
-        services.AddScoped<IPublisherService, PublisherService>();
+        services.AddScoped<IPublisherService, WhatsAppPublisherService>();
+        services.AddScoped<IPublisherService, EmailPublisherService>();
+        services.AddScoped<IPublisherService, SmsPublisherService>();
+
         services.AddScoped<ISendManager, SendManager>();
 
         return services;
