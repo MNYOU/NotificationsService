@@ -2,8 +2,8 @@
 using System.Text.Json;
 using MessagePublisher.Core.Common;
 using MessagePublisher.Logic.Interfaces.Services;
-using MessagePublisher.Logic.Models.DTO.SendModels;
 using MessagePublisher.Logic.Models.Options;
+using MessagePublisher.Logic.Models.Requests.Send;
 using Microsoft.Extensions.Options;
 using RabbitMQ.Client;
 
@@ -13,7 +13,7 @@ public class PublisherService(IOptions<RabbitMqOption> options) : IPublisherServ
 {
     private readonly string hostName = options.Value.HostName;
 
-    public async Task<OperationResult> Publish(SendMessage message)
+    public async Task<OperationResult> Publish(SendMessageRequest message)
     {
         var factory = new ConnectionFactory { HostName = hostName };
         await using var connection = await factory.CreateConnectionAsync();

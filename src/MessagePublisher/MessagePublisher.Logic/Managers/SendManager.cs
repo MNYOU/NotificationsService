@@ -10,7 +10,6 @@ public class SendManager(IPublisherService publisherService) : ISendManager
 {
     public async Task<OperationResult> Send(SendMessageRequest request)
     {
-        var sendModel = request.ToApplicationMessage();
-        return await publisherService.Publish(sendModel);
+        return await publisherService.Publish(request);
     }
 }
