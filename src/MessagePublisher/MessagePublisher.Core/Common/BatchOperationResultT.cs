@@ -1,6 +1,6 @@
 ﻿using System.Collections.Frozen;
 
-namespace WhatsappSender.Core.Common;
+namespace MessagePublisher.Core.Common;
 
 public class BatchOperationResult<T> : BatchOperationResult
 {

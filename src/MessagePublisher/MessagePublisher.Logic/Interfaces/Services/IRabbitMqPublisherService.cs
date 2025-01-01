@@ -1,5 +1,5 @@
-﻿using MessagePublisher.Logic.Models.DTO.SendModels;
-using WhatsappSender.Core.Common;
+﻿using MessagePublisher.Core.Common;
+using MessagePublisher.Logic.Models.DTO.SendModels;
 
 namespace MessagePublisher.Logic.Interfaces.Services;
 

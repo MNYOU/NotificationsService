@@ -1,8 +1,8 @@
-﻿using MessagePublisher.Logic.Extensions;
+﻿using MessagePublisher.Core.Common;
+using MessagePublisher.Logic.Extensions;
 using MessagePublisher.Logic.Interfaces.Managers;
 using MessagePublisher.Logic.Interfaces.Services;
 using MessagePublisher.Logic.Models.Requests.Send;
-using WhatsappSender.Core.Common;
 
 namespace MessagePublisher.Logic.Managers;
 

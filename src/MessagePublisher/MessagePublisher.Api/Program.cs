@@ -1,4 +1,3 @@
-using MessagePublisher.Logic;
 using MessagePublisher.Logic.Extensions;
 using MessagePublisher.Logic.Models.Options;
 

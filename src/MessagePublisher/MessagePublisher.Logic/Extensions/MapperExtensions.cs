@@ -14,7 +14,7 @@ internal static class MapperExtensions
     public static SendMessage ToApplicationMessage(this SendMessageRequest request)
     {
         var attachments = request.Attachments.ToApplicationAttachments().ToList();
-        return new SendMessage()
+        return new SendMessage
         {
             Attachments = attachments,
             Title = request.Title,
@@ -31,10 +31,10 @@ internal static class MapperExtensions
 
     public static SendAttachment ToApplicationAttachment(this SendAttachmentRequest request)
     {
-        return new SendAttachment()
+        return new SendAttachment
         {
             FileName = request.FileName,
-            FileUrl = request.PublicUrl,
+            FileUrl = request.PublicUrl
         };
     }
 }

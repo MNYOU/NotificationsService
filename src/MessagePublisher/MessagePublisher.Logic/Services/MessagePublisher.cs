@@ -1,11 +1,11 @@
 ﻿using System.Text;
 using System.Text.Json;
+using MessagePublisher.Core.Common;
 using MessagePublisher.Logic.Interfaces.Services;
 using MessagePublisher.Logic.Models.DTO.SendModels;
 using MessagePublisher.Logic.Models.Options;
 using Microsoft.Extensions.Options;
 using RabbitMQ.Client;
-using WhatsappSender.Core.Common;
 
 namespace MessagePublisher.Logic.Services;
 

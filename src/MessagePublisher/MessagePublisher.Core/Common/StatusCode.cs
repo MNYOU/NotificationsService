@@ -1,4 +1,4 @@
-﻿namespace WhatsappSender.Core.Common;
+﻿namespace MessagePublisher.Core.Common;
 
 public enum StatusCode
 {

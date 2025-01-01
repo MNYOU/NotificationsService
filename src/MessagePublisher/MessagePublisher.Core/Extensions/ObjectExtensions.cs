@@ -1,4 +1,4 @@
-﻿namespace WhatsappSender.Core.Extensions;
+﻿namespace MessagePublisher.Core.Extensions;
 
 public static class ObjectExtensions
 {

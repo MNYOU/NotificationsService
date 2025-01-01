@@ -1,6 +1,6 @@
-﻿using WhatsappSender.Core.Common;
+﻿using MessagePublisher.Core.Common;
 
-namespace WhatsappSender.Core.Extensions;
+namespace MessagePublisher.Core.Extensions;
 
 public static class OperationResultExtensions
 {
