@@ -1,4 +1,4 @@
-﻿namespace MessagePublisher.Logic;
+﻿namespace MessagePublisher.Logic.Models.Options;
 
 public class RabbitMqOption
 {
