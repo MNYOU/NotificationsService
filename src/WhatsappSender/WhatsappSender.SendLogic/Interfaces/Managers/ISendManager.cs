@@ -6,6 +6,6 @@ namespace WhatsappSender.SendLogic.Interfaces.Managers;
 
 public interface ISendManager
 {
-    public Task<BatchOperationResult<SendMessage>> SendBulk(IEnumerable<SendMessageRequest> messages);
+    public Task<BatchOperationResult<SendMessage>> SendBulk(ICollection<SendMessageRequest> messages);
     public Task<OperationResult<SendMessage>> SendMessage(SendMessageRequest message);
 }
