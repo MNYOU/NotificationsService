@@ -16,7 +16,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\SMSSender.Core\SMSSender.Core.csproj" />
       <ProjectReference Include="..\SMSSender.Domain\SMSSender.Domain.csproj" />
     </ItemGroup>
 

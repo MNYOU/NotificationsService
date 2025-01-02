@@ -1,5 +1,4 @@
 ﻿using CoreLib.Common;
-using EmailSender.Core.Common;
 using Microsoft.AspNetCore.Mvc;
 
 namespace SMSSender.Api.Extensions;
