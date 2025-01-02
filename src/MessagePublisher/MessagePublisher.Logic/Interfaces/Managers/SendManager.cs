@@ -1,4 +1,4 @@
-﻿using MessagePublisher.Core.Common;
+﻿using CoreLib.Common;
 using MessagePublisher.Logic.Models.Requests.Send;
 
 namespace MessagePublisher.Logic.Interfaces.Managers;

@@ -1,6 +1,6 @@
-﻿using MessagePublisher.Api.Controllers.Base;
+﻿using CoreLib.Common;
+using MessagePublisher.Api.Controllers.Base;
 using MessagePublisher.Api.Extensions;
-using MessagePublisher.Core.Common;
 using MessagePublisher.Logic.Interfaces.Managers;
 using MessagePublisher.Logic.Models.Requests.Send;
 using Microsoft.AspNetCore.Mvc;

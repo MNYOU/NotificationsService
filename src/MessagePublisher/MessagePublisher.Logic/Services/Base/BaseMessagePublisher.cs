@@ -1,7 +1,7 @@
 ﻿using System.Collections.Concurrent;
 using System.Text;
 using System.Text.Json;
-using MessagePublisher.Core.Common;
+using CoreLib.Common;
 using MessagePublisher.Logic.Interfaces.Services;
 using MessagePublisher.Logic.Models.DTO.SendModels;
 using MessagePublisher.Logic.Models.Options;

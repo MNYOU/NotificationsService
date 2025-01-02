@@ -1,4 +1,4 @@
-﻿using MessagePublisher.Core.Common;
+﻿using CoreLib.Common;
 using MessagePublisher.Logic.Models.DTO.SendModels;
 using MessagePublisher.Logic.Models.Requests.Send;
 
