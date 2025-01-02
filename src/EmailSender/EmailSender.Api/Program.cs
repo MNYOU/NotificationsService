@@ -1,3 +1,5 @@
+using CoreLib.Logging.Extensions;
+
 namespace EmailSender.Api;
 
 public class Program
@@ -11,6 +13,7 @@ public class Program
     private static IHostBuilder CreateHostBuilder(string[] args)
     {
         return Host.CreateDefaultBuilder(args)
+            .UseCustomizedSerilogLogging()
             .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
     }
 }
