@@ -14,7 +14,7 @@ public class SendController(ISendManager sendManager) : ApiControllerBase
     [ProducesDefaultResponseType(typeof(BatchOperationResult<SendMessage>))]
     [ProducesResponseType<BatchOperationResult<SendMessage>>(StatusCodes.Status200OK)]
     [ProducesResponseType<BatchOperationResult<SendMessage>>(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<SendMessage>> SendMessages(IEnumerable<SendMessageRequest> sendMessages)
+    public async Task<ActionResult<SendMessage>> SendMessages(ICollection<SendMessageRequest> sendMessages)
     {
         var sendResult = await sendManager.SendBulk(sendMessages);
         return sendResult.ToActionResult();
