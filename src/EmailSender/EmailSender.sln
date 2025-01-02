@@ -4,8 +4,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailSender.Api", "EmailSen
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailSender.Domain", "EmailSender.Domain\EmailSender.Domain.csproj", "{578AD5AC-68B4-4584-AB3D-6EF718CF706F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailSender.Core", "EmailSender.Core\EmailSender.Core.csproj", "{4433C716-81B9-4C5B-AD8D-4FE1C015EE1B}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailSender.SendLogic", "EmailSender.SendLogic\EmailSender.SendLogic.csproj", "{9246BFBC-776E-41FD-8898-75D288973747}"
 EndProject
 Global
@@ -22,10 +20,6 @@ Global
 		{578AD5AC-68B4-4584-AB3D-6EF718CF706F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{578AD5AC-68B4-4584-AB3D-6EF718CF706F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{578AD5AC-68B4-4584-AB3D-6EF718CF706F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4433C716-81B9-4C5B-AD8D-4FE1C015EE1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4433C716-81B9-4C5B-AD8D-4FE1C015EE1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4433C716-81B9-4C5B-AD8D-4FE1C015EE1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4433C716-81B9-4C5B-AD8D-4FE1C015EE1B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9246BFBC-776E-41FD-8898-75D288973747}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9246BFBC-776E-41FD-8898-75D288973747}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9246BFBC-776E-41FD-8898-75D288973747}.Release|Any CPU.ActiveCfg = Release|Any CPU
