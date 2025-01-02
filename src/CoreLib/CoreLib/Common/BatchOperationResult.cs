@@ -1,8 +1,9 @@
 ﻿using System.Collections.Frozen;
-using EmailSender.Core.Common;
+using JetBrains.Annotations;
 
 namespace CoreLib.Common;
 
+[PublicAPI]
 public class BatchOperationResult(int successes, int failures, IEnumerable<Error> errorMessages)
 {
     public int Successes { get; } = successes;

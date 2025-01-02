@@ -1,5 +1,8 @@
-﻿namespace EmailSender.Core.Common;
+﻿using JetBrains.Annotations;
 
+namespace CoreLib.Common;
+
+[PublicAPI]
 public enum StatusCode
 {
     Ok = 200,

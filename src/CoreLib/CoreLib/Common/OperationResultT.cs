@@ -1,5 +1,8 @@
-﻿namespace CoreLib.Common;
+﻿using JetBrains.Annotations;
 
+namespace CoreLib.Common;
+
+[PublicAPI]
 public class OperationResult<TResult> : OperationResult
 {
     private OperationResult(TResult result)

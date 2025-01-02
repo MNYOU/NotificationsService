@@ -1,8 +1,9 @@
 ﻿using System.Collections.Frozen;
-using EmailSender.Core.Common;
+using JetBrains.Annotations;
 
 namespace CoreLib.Common;
 
+[PublicAPI]
 public class BatchOperationResult<T> : BatchOperationResult
 {
     public IReadOnlyCollection<T> SuccessfulEntities { get; }

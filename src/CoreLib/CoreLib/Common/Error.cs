@@ -1,7 +1,8 @@
-﻿using EmailSender.Core.Common;
+﻿using JetBrains.Annotations;
 
 namespace CoreLib.Common;
 
+[PublicAPI]
 public class Error(StatusCode statusCode, string message)
 {
     public StatusCode StatusCode { get; } = statusCode;
