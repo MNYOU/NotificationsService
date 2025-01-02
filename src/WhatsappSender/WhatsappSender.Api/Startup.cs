@@ -1,4 +1,6 @@
-﻿using WhatsappSender.Api.Subscriptions;
+﻿using WhatsappSender.Api.Consumers;
+using WhatsappSender.Api.Consumers.Interfaces;
+using WhatsappSender.Api.Consumers.Options;
 using WhatsappSender.SendLogic.Extensions;
 
 namespace WhatsappSender.Api;
@@ -27,7 +29,9 @@ public class Startup(IConfiguration configuration)
         services.AddHttpLogging(_ => { });
         services.AddLogging(config => config.AddConsole());
         services.AddSendLogic(configuration);
-        services.AddScoped<IRabbitMqSubscriber, RabbitMqSubscriber>();
+        services.Configure<RabbitMqOption>(configuration.GetSection(nameof(RabbitMqOption)));
+        services.AddScoped<IConsumerService, RabbitMqConsumer>();
+        services.AddHostedService<ConsumerServiceInitializer>();
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
