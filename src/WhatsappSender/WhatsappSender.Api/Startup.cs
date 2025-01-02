@@ -1,4 +1,4 @@
-﻿using Serilog;
+﻿using CoreLib.Logging.Extensions;
 using WhatsappSender.Api.Subscriptions;
 using WhatsappSender.SendLogic.Extensions;
 
@@ -26,11 +26,6 @@ public class Startup(IConfiguration configuration)
             });
         });
         services.AddHttpLogging(_ => { });
-        services.AddSerilog((serviceProvider, lc) => lc
-            .ReadFrom.Configuration(configuration)
-            .ReadFrom.Services(serviceProvider)
-            .Enrich.FromLogContext()
-            .WriteTo.Console());
         services.AddSendLogic(configuration);
         services.AddScoped<IRabbitMqSubscriber, RabbitMqSubscriber>();
     }
@@ -44,7 +39,6 @@ public class Startup(IConfiguration configuration)
             app.UseSwagger();
             app.UseSwaggerUI();
         }
-        app.UseSerilogRequestLogging();
         app.UseHttpsRedirection();
         app.UseCors("default");
         app.UseRouting();

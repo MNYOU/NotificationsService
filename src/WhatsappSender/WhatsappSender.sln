@@ -2,8 +2,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhatsappSender.Api", "WhatsappSender.Api\WhatsappSender.Api.csproj", "{DDF671E3-479B-4B7A-B282-2806F620FD5D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhatsappSender.Core", "WhatsappSender.Core\WhatsappSender.Core.csproj", "{0ED8B787-56DF-4C38-9115-2FBDA9044C31}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhatsappSender.SendLogic", "WhatsappSender.SendLogic\WhatsappSender.SendLogic.csproj", "{07CF70B8-248A-4436-B554-172A33D9151A}"
 EndProject
 Global
@@ -16,10 +14,6 @@ Global
 		{DDF671E3-479B-4B7A-B282-2806F620FD5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DDF671E3-479B-4B7A-B282-2806F620FD5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DDF671E3-479B-4B7A-B282-2806F620FD5D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0ED8B787-56DF-4C38-9115-2FBDA9044C31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0ED8B787-56DF-4C38-9115-2FBDA9044C31}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0ED8B787-56DF-4C38-9115-2FBDA9044C31}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0ED8B787-56DF-4C38-9115-2FBDA9044C31}.Release|Any CPU.Build.0 = Release|Any CPU
 		{07CF70B8-248A-4436-B554-172A33D9151A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{07CF70B8-248A-4436-B554-172A33D9151A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{07CF70B8-248A-4436-B554-172A33D9151A}.Release|Any CPU.ActiveCfg = Release|Any CPU
