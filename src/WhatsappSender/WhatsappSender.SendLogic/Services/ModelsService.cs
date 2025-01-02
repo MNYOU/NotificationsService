@@ -1,11 +1,12 @@
-﻿using WhatsappBusiness.CloudApi.Messages.Requests;
+﻿using Microsoft.Extensions.Logging;
+using WhatsappBusiness.CloudApi.Messages.Requests;
 using WhatsappSender.Core.Common;
 using WhatsappSender.SendLogic.Interfaces.Services;
 using WhatsappSender.SendLogic.Models.DTO.SendModels;
 
 namespace WhatsappSender.SendLogic.Services;
 
-internal sealed class ModelsService : IModelsService
+internal sealed class ModelsService(ILogger<ModelsService> logger) : IModelsService
 {
     public OperationResult<TextMessageRequest> CreateTextMessageRequest(
         string phoneNumber, string text)
@@ -19,6 +20,7 @@ internal sealed class ModelsService : IModelsService
                 PreviewUrl = false
             }
         };
+        logger.LogDebug("TextMessageRequest created for phone number: {PhoneNumber}", phoneNumber);
         return textMessageRequest;
     }
 
@@ -33,6 +35,8 @@ internal sealed class ModelsService : IModelsService
                 Link = pathAttachment.FileUrl
             }
         };
+        logger.LogDebug("DocumentMessageByUrlRequest created for phone number: {PhoneNumber}, File: {FileName}", 
+            phoneNumber, pathAttachment.FileName);
         return documentMessage;
     }
 }
