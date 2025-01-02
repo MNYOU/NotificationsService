@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CoreLib.Common;
+using Microsoft.AspNetCore.Mvc;
 using WhatsappSender.Api.Controllers.Base;
 using WhatsappSender.Api.Extensions;
-using WhatsappSender.Core.Common;
 using WhatsappSender.SendLogic.Interfaces.Managers;
 using WhatsappSender.SendLogic.Models.DTO.SendModels;
 using WhatsappSender.SendLogic.Models.Requests.Send;
@@ -14,7 +14,7 @@ public class SendController(ISendManager sendManager) : ApiControllerBase
     [ProducesDefaultResponseType(typeof(BatchOperationResult<SendMessage>))]
     [ProducesResponseType<BatchOperationResult<SendMessage>>(StatusCodes.Status200OK)]
     [ProducesResponseType<BatchOperationResult<SendMessage>>(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<SendMessage>> SendMessages(IEnumerable<SendMessageRequest> sendMessages)
+    public async Task<ActionResult<SendMessage>> SendMessages(ICollection<SendMessageRequest> sendMessages)
     {
         var sendResult = await sendManager.SendBulk(sendMessages);
         return sendResult.ToActionResult();

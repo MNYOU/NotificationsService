@@ -1,4 +1,5 @@
-﻿using EmailSender.Core.Common;
+﻿using CoreLib.Common;
+using EmailSender.Core.Common;
 using EmailSender.Domain.Settings;
 using EmailSender.SendLogic.Interfaces.Services;
 using EmailSender.SendLogic.Models.DTO.SendModels;

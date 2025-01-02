@@ -1,4 +1,4 @@
-﻿using EmailSender.Core.Common;
+﻿using CoreLib.Common;
 using EmailSender.SendLogic.Models.DTO.SendModels;
 using EmailSender.SendLogic.Models.Requests.Send;
 

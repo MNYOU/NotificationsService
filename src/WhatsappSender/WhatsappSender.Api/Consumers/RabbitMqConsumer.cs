@@ -1,11 +1,11 @@
 ﻿using System.Text;
 using System.Text.Json;
+using CoreLib.Common;
 using Microsoft.Extensions.Options;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using WhatsappSender.Api.Consumers.Interfaces;
 using WhatsappSender.Api.Consumers.Options;
-using WhatsappSender.Core.Common;
 using WhatsappSender.SendLogic.Interfaces.Managers;
 using WhatsappSender.SendLogic.Models.Requests.Send;
 
