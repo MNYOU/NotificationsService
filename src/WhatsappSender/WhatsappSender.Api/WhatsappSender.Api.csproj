@@ -18,4 +18,10 @@
       <ProjectReference Include="..\WhatsappSender.SendLogic\WhatsappSender.SendLogic.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Reference Include="CoreLib">
+        <HintPath>..\..\CoreLib\CoreLib\bin\Debug\net8.0\CoreLib.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+
 </Project>

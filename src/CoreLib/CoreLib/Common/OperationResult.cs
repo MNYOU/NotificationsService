@@ -1,4 +1,4 @@
-﻿namespace SMSSender.Core.Common;
+﻿namespace CoreLib.Common;
 
 public class OperationResult
 {

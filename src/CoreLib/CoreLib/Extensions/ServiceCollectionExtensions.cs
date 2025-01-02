@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace WhatsappSender.Core.Extensions;
+namespace CoreLib.Extensions;
 
 public static class ServiceCollectionExtensions
 {

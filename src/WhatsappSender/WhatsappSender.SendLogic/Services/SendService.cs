@@ -1,8 +1,8 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using CoreLib.Common;
+using Microsoft.Extensions.Logging;
 using WhatsappBusiness.CloudApi.Exceptions;
 using WhatsappBusiness.CloudApi.Interfaces;
 using WhatsappBusiness.CloudApi.Messages.Requests;
-using WhatsappSender.Core.Common;
 using WhatsappSender.SendLogic.Interfaces.Services;
 using WhatsappSender.SendLogic.Models.DTO.SendModels;
 

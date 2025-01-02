@@ -1,6 +1,6 @@
-﻿using EmailSender.Api.Controllers.Base;
+﻿using CoreLib.Common;
+using EmailSender.Api.Controllers.Base;
 using EmailSender.Api.Extensions;
-using EmailSender.Core.Common;
 using EmailSender.SendLogic.Interfaces.Managers;
 using EmailSender.SendLogic.Models.DTO.SendModels;
 using EmailSender.SendLogic.Models.Requests.Send;

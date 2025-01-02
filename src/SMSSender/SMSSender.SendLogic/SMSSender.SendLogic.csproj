@@ -27,4 +27,10 @@
       <PackageReference Include="SMSC" Version="1.0.9" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Reference Include="CoreLib">
+        <HintPath>..\..\CoreLib\CoreLib\bin\Debug\net8.0\CoreLib.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+
 </Project>

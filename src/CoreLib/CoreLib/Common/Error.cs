@@ -1,4 +1,6 @@
-﻿namespace EmailSender.Core.Common;
+﻿using EmailSender.Core.Common;
+
+namespace CoreLib.Common;
 
 public class Error(StatusCode statusCode, string message)
 {

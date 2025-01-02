@@ -1,4 +1,4 @@
-﻿using SMSSender.Core.Common;
+﻿using CoreLib.Common;
 using SMSSender.SendLogic.Models.DTO.SendModels;
 
 namespace SMSSender.SendLogic.Interfaces.Services;

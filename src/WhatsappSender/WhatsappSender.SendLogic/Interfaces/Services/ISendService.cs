@@ -1,4 +1,4 @@
-﻿using WhatsappSender.Core.Common;
+﻿using CoreLib.Common;
 using WhatsappSender.SendLogic.Models.DTO.SendModels;
 
 namespace WhatsappSender.SendLogic.Interfaces.Services;

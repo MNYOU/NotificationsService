@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CoreLib.Common;
+using Microsoft.AspNetCore.Mvc;
 using SMSSender.Api.Controllers.Base;
-using SMSSender.Core.Common;
 using SMSSender.SendLogic.Interfaces.Managers;
 using SMSSender.SendLogic.Models.DTO.SendModels;
 using SMSSender.SendLogic.Models.Requests.Send;

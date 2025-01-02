@@ -1,4 +1,4 @@
-﻿namespace WhatsappSender.Core.Common;
+﻿namespace CoreLib.Common;
 
 public class OperationResult<TResult> : OperationResult
 {
@@ -9,9 +9,13 @@ public class OperationResult<TResult> : OperationResult
 
     private OperationResult(Error error) : base(error)
     {
+        Result = default!;
     }
 
-    public TResult? Result { get; }
+    /// <summary>
+    /// Not null when IsSuccess == true
+    /// </summary>
+    public TResult Result { get; }
 
     public static OperationResult<TResult> Success(TResult result)
     {

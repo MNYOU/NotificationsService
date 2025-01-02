@@ -1,5 +1,5 @@
-﻿using WhatsappBusiness.CloudApi.Messages.Requests;
-using WhatsappSender.Core.Common;
+﻿using CoreLib.Common;
+using WhatsappBusiness.CloudApi.Messages.Requests;
 using WhatsappSender.SendLogic.Models.DTO.SendModels;
 
 namespace WhatsappSender.SendLogic.Interfaces.Services;

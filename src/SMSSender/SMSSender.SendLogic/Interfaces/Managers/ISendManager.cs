@@ -1,4 +1,4 @@
-﻿using SMSSender.Core.Common;
+﻿using CoreLib.Common;
 using SMSSender.SendLogic.Models.DTO.SendModels;
 using SMSSender.SendLogic.Models.Requests.Send;
 

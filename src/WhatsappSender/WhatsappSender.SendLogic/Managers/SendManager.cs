@@ -1,5 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
-using WhatsappSender.Core.Common;
+﻿using CoreLib.Common;
+using Microsoft.Extensions.Logging;
 using WhatsappSender.SendLogic.Extensions;
 using WhatsappSender.SendLogic.Interfaces.Managers;
 using WhatsappSender.SendLogic.Interfaces.Services;

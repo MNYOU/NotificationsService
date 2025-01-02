@@ -1,4 +1,4 @@
-﻿namespace SMSSender.Core.Extensions;
+﻿namespace CoreLib.Extensions;
 
 public static class ObjectExtensions
 {

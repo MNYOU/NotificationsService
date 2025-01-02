@@ -1,6 +1,7 @@
 ﻿using System.Collections.Frozen;
+using EmailSender.Core.Common;
 
-namespace EmailSender.Core.Common;
+namespace CoreLib.Common;
 
 public class BatchOperationResult(int successes, int failures, IEnumerable<Error> errorMessages)
 {

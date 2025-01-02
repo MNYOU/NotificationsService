@@ -1,7 +1,6 @@
 ﻿using System.Collections.Immutable;
-using System.Diagnostics.Contracts;
 
-namespace SMSSender.Core.Extensions;
+namespace CoreLib.Extensions;
 
 public static class CollectionExtensions
 {

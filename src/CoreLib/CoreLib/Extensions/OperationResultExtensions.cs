@@ -1,6 +1,6 @@
-﻿using EmailSender.Core.Common;
+﻿using CoreLib.Common;
 
-namespace EmailSender.Core.Extensions;
+namespace CoreLib.Extensions;
 
 public static class OperationResultExtensions
 {

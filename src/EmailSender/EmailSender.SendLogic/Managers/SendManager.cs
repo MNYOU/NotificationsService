@@ -1,4 +1,4 @@
-﻿using EmailSender.Core.Common;
+﻿using CoreLib.Common;
 using EmailSender.SendLogic.Extensions;
 using EmailSender.SendLogic.Interfaces.Managers;
 using EmailSender.SendLogic.Interfaces.Services;

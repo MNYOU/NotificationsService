@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CoreLib.Common;
+using Microsoft.AspNetCore.Mvc;
 using WhatsappSender.Api.Controllers.Base;
 using WhatsappSender.Api.Extensions;
-using WhatsappSender.Core.Common;
 using WhatsappSender.SendLogic.Interfaces.Managers;
 using WhatsappSender.SendLogic.Models.DTO.SendModels;
 using WhatsappSender.SendLogic.Models.Requests.Send;

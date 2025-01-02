@@ -1,5 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using WhatsappSender.Core.Common;
+﻿using CoreLib.Common;
+using EmailSender.Core.Common;
+using Microsoft.AspNetCore.Mvc;
 
 namespace WhatsappSender.Api.Extensions;
 
