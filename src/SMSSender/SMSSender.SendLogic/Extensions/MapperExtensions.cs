@@ -16,7 +16,7 @@ internal static class MapperExtensions
         return new SendMessage()
         {
             Sender = request.Sender,
-            Recipients = request.Recipients,
+            Recipient = request.Recipient,
             Message = request.Message,
         };
     }
