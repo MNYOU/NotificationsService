@@ -8,6 +8,8 @@ using SMSC.Types;
 using SMSC.Http;
 using SMSC.Types.Enums;
 using SMSSender.SendLogic.Managers;
+using System.Text;
+using System.Net.Mail;
 
 namespace SMSSender.SendLogic.Services;
 
@@ -21,22 +23,24 @@ public sealed class SendService(IOptions<SMSSettings> settingProvider, ILogger<S
         var providerConfig = new ProviderConfiguration(settings.ApiKey);
         var httpSmsSender = new HttpSms(providerConfig);
         var smsConfig = new SmsConfiguration()
-        {
-            SmsType = SmsType.Default,
+{
             Sender = settings.Sender,
         };
+        var message = GetMessageBody(smsMessage.Content, smsMessage.Attachments);
+
         OperationResult<SendMessage> result;
+
         try
         {
-            var httpSmsResponse = await httpSmsSender.SendSms(smsMessage.Recipient, smsMessage.Message, smsConfig);
+            var httpSmsResponse = await httpSmsSender.SendSms(smsMessage.Recipient, message, smsConfig);
             result = smsMessage;
             logger.LogInformation("Successfully sent message to: {Recipient}", smsMessage.Recipient);
         }
         catch (Exception ex)
         {
             result = Error.BadRequest($"Ошибка при отправке сообщения на номер {smsMessage.Recipient} " +
-                $"с телом {smsMessage.Message}. {ex.Message}");
-            logger.LogError(ex, "Error sending SMS message to recipients: {Recipient} with message {Message}", 
+                $"с телом {smsMessage.Content}. {ex.Message}");
+            logger.LogError(ex, "Error sending SMS message to recipients: {Recipient} with message {Content}", 
                 smsMessage.Recipient, result.Error!.Message);
         }
 
@@ -85,5 +89,18 @@ public sealed class SendService(IOptions<SMSSettings> settingProvider, ILogger<S
             result = $"Ошибка при получении баланса. {ex.Message}";
         }
         return result;
+    }
+
+    private string GetMessageBody(string content, IEnumerable<SendAttachment> attachments)
+    {
+        var builder = new StringBuilder(content);
+
+        foreach (var attachment in attachments)
+        {
+            builder.Append("\r\n");
+            builder.Append(attachment);
+        }
+
+        return builder.ToString();
     }
 }

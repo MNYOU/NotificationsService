@@ -29,7 +29,7 @@ public class SendManager(ISendService sendService, ILogger<SendManager> logger) 
     public async Task<BatchOperationResult<SendMessage>> SendBulk(IEnumerable<SendMessageRequest> smsMessages)
     {
         var sendMessages = smsMessages.ToApplicationMessages();
-        logger.LogDebug("Mapped SendMessageRequest to SendMessage. Message count: {Count}", sendMessages.Count);
+        logger.LogDebug("Mapped SendMessageRequest to SendMessage. Content count: {Count}", sendMessages.Count);
         var sendResult = await sendService.SendBulk(sendMessages);
 
         if(sendResult.IsFailure)

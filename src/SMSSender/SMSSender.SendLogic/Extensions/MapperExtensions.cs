@@ -13,11 +13,27 @@ internal static class MapperExtensions
 
     public static SendMessage ToApplicationMessage(this SendMessageRequest request)
     {
+        var attachments = request.Attachments.ToApplicationAttachments().ToList();
         return new SendMessage()
         {
             Sender = request.Sender,
             Recipient = request.Recipient,
-            Message = request.Message,
+            Content = request.Content,
+            Attachments = attachments
+        };
+    }
+
+    public static IReadOnlyCollection<SendAttachment> ToApplicationAttachments(this IEnumerable<SendAttachmentRequest> requests)
+    {
+        return requests.Select(ToApplicationAttachment).ToFrozenSet();
+    }
+
+    public static SendAttachment ToApplicationAttachment(this SendAttachmentRequest request)
+    {
+        return new SendAttachment()
+        {
+            FileName = request.FileName,
+            FileUrl = request.PublicUrl,
         };
     }
 }

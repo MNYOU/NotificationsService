@@ -7,5 +7,5 @@ namespace SMSSender.SendLogic.Interfaces.Managers;
 public interface ISendManager
 {
     public Task<OperationResult<SendMessage>> SendMessage(SendMessageRequest smsMessage);
-    public Task<BatchOperationResult<SendMessage>> SendBulk(IEnumerable<SendMessageRequest> messages);
+    public Task<BatchOperationResult<SendMessage>> SendBulk(IEnumerable<SendMessageRequest> smsMessages);
 }

@@ -12,10 +12,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Models\DTO\" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\SMSSender.Domain\SMSSender.Domain.csproj" />
     </ItemGroup>
 
@@ -26,7 +22,7 @@
       <PackageReference Include="NotiSendDotNet" Version="1.0.1" />
       <PackageReference Include="SMSC" Version="1.0.9" />
     </ItemGroup>
-
+    
     <ItemGroup>
       <Reference Include="CoreLib">
         <HintPath>..\..\CoreLib\CoreLib\bin\Debug\net8.0\CoreLib.dll</HintPath>
