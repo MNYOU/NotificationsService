@@ -1,4 +1,5 @@
 ﻿using CoreLib.Common;
+using CoreLib.Logging.Extensions;
 using EmailSender.Domain.Settings;
 using EmailSender.SendLogic.Interfaces.Services;
 using EmailSender.SendLogic.Models.DTO.SendModels;
@@ -23,14 +24,13 @@ public sealed class SendService(IOptions<EmailSettings> settingProvider, ILogger
         {
             await client.SendAsync(message);
             result = emailMessage;
-            logger.LogInformation("Successfully sent message to: {Recipient}", emailMessage.Recipient);
         }
         catch (Exception ex)
         {
             result = Error.BadRequest($"Ошибка при отправке сообщения пользователю {emailMessage.Recipient} " +
                                       $"с заголовком {emailMessage.Title} и телом {emailMessage.Content} {ex.Message}");
-            logger.LogError("Failed to send message to: {Recipient}. Error: {Error}", emailMessage.Recipient, result.Error);
         }
+        logger.LogResult(result);
 
         return result;
     }
@@ -45,16 +45,8 @@ public sealed class SendService(IOptions<EmailSettings> settingProvider, ILogger
             var sendResult = await SendSingleFromBulkAsync(message, client);
             results.Add(sendResult);
         }
-
         var batchResult = BatchOperationResult<SendMessage>.FromOperationResults(results);
-        if (batchResult.IsFailure)
-        {
-            logger.LogError("Failed to send all bulk messages. Errors: {Errors}", batchResult.Errors);
-        }
-        else
-        {
-            logger.LogInformation("Successfully sent all bulk messages"); 
-        }
+        logger.LogBatchResult(batchResult);
         return batchResult;
     }
 
@@ -62,17 +54,19 @@ public sealed class SendService(IOptions<EmailSettings> settingProvider, ILogger
         SmtpClient client)
     {
         using var message = GetMimeMessage(emailMessage);
+        OperationResult<SendMessage> result = emailMessage;
         try
         {
             await client.SendAsync(message);
         }
         catch (Exception ex)
         {
-            return Error.BadRequest($"Ошибка при отправке сообщения пользователю {emailMessage.Recipient} " +
+            result = Error.BadRequest($"Ошибка при отправке сообщения пользователю {emailMessage.Recipient} " +
                                     $"с заголовком {emailMessage.Title} и телом {emailMessage.Content} {ex.Message}");
         }
-
-        return emailMessage;
+        
+        logger.LogResult(result);
+        return result;
     }
 
     private MimeMessage GetMimeMessage(SendMessage emailMessage)

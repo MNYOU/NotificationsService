@@ -1,4 +1,5 @@
 ﻿using CoreLib.Common;
+using CoreLib.Logging.Extensions;
 using EmailSender.SendLogic.Extensions;
 using EmailSender.SendLogic.Interfaces.Managers;
 using EmailSender.SendLogic.Interfaces.Services;
@@ -16,14 +17,7 @@ public class SendManager(ISendService sendService, ILogger<SendManager> logger) 
         var sendMessages = messages.ToApplicationMessages();
         logger.LogDebug("Mapped SendMessageRequest to SendMessage. Message count: {Count}", sendMessages.Count);
         var sendResult = await sendService.SendBulk(sendMessages);
-        if(sendResult.IsFailure)
-        {
-            logger.LogError("Failed to send bulk messages. Errors: {Errors}", sendResult.Errors);
-        }
-        else
-        {
-            logger.LogInformation("Successfully sent bulk messages");
-        }
+        logger.LogBatchResult(sendResult);
         return sendResult;
     }
     
@@ -33,14 +27,7 @@ public class SendManager(ISendService sendService, ILogger<SendManager> logger) 
         var sendMessage = message.ToApplicationMessage();
         logger.LogDebug("Mapped SendMessageRequest to SendMessage for recipient: {Recipient}", message.Recipient);
         var sendResult = await sendService.Send(sendMessage);
-        if(sendResult.IsFail)
-        {
-            logger.LogError("Failed to send message to recipient: {Recipient}. Error: {Error}", message.Recipient, sendResult.Error); 
-        }
-        else
-        {
-            logger.LogInformation("Successfully sent message to recipient: {Recipient}", message.Recipient);
-        }
+        logger.LogResult(sendResult);
         return sendResult;
     }
 }
