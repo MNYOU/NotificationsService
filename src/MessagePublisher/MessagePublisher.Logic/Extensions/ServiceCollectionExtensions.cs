@@ -16,6 +16,11 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IPublisherService<WhatsAppMessageRequest>, WhatsAppPublisherService>();
         services.AddScoped<IPublisherService<EmailMessageRequest>, EmailPublisherService>();
         services.AddScoped<IPublisherService<SmsMessageRequest>, SmsPublisherService>();
+        
+        services.AddScoped<IPublisherManager, WhatsAppPublisherManager>();
+        services.AddScoped<IPublisherManager, EmailPublisherManager>();
+        services.AddScoped<IPublisherManager, SmsPublisherManager>();
+        
         services.AddScoped<ISendManager, SendManager>();
 
         return services;
