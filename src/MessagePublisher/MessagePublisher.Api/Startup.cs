@@ -1,4 +1,5 @@
-﻿using MessagePublisher.Logic.Extensions;
+﻿using MessageBroker.Extensions;
+using MessagePublisher.Logic.Extensions;
 
 namespace MessagePublisher.Api;
 
@@ -25,6 +26,7 @@ public class Startup(IConfiguration configuration)
         });
         services.AddHttpLogging(_ => { });
         services.AddLogging(config => config.AddConsole());
+        services.AddMessageBrokerServices(configuration);
         services.AddPublisherServices();
     }
 

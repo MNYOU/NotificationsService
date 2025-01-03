@@ -6,17 +6,19 @@ using MessageBroker.Helpers;
 using MessageBroker.Settings;
 using MessagePublisher.Logic.Interfaces.Services;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace MessagePublisher.Logic.Services;
 
-public class WhatsAppPublisherService : SimplePublishClient, IPublisherService<WhatsAppMessageRequest>
+public class WhatsAppPublisherService(
+    IOptions<PublisherOptions> consumerOptions,
+    IOptions<RabbitMqOption> options,
+    ILogger<EmailPublisherService> logger,
+    Serializer serializer,
+    IServiceProvider serviceProvider)
+    : SimplePublishClient(consumerOptions, options, logger, serializer, serviceProvider),
+        IPublisherService<WhatsAppMessageRequest>
 {
-    protected WhatsAppPublisherService(PublisherOptions consumerOptions, ILogger<EmailPublisherService> logger, 
-        Serializer serializer, IServiceProvider serviceProvider) 
-        : base(consumerOptions, logger, serializer, serviceProvider)
-    {
-    }
-
     public async Task<OperationResult> Publish(WhatsAppMessageRequest body)
     {
         var queueName = QueueConstants.WhatsappQueueName;
