@@ -1,4 +1,5 @@
 ﻿using CoreLib.Common;
+using CoreLib.Logging.Extensions;
 using Microsoft.Extensions.Logging;
 using WhatsappBusiness.CloudApi.Exceptions;
 using WhatsappBusiness.CloudApi.Interfaces;
@@ -37,14 +38,7 @@ public sealed class SendService(IModelsService modelsService, IWhatsAppBusinessC
             sendResults.Add(result);
         }
         var batchResult = BatchOperationResult<SendMessage>.FromOperationResults(sendResults);
-        if (batchResult.IsFailure)
-        {
-            logger.LogError("Failed to send all bulk messages. Errors: {Errors}", batchResult.Errors);
-        }
-        else
-        {
-            logger.LogInformation("Successfully sent all bulk messages"); 
-        }
+        logger.LogBatchResult(batchResult);
         return batchResult;
     }
 
@@ -87,8 +81,8 @@ public sealed class SendService(IModelsService modelsService, IWhatsAppBusinessC
             return textTemplateMessageResult.Error!;
         }
 
-        logger.LogDebug("Sending text message for: {Recipient}", recipient);
         var sendResult = await SendTextMessage(textTemplateMessageResult.Result!);
+        logger.LogResult(sendResult);
         return sendResult;
     }
 
@@ -106,6 +100,7 @@ public sealed class SendService(IModelsService modelsService, IWhatsAppBusinessC
 
         logger.LogDebug("Sending file message for: {Recipient}, File: {FileName}", recipient, attachment.FileName);
         var sendResult = await SendFileMessage(textTemplateMessageResult.Result!);
+        logger.LogResult(sendResult);
         return sendResult;
     }
 
