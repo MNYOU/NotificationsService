@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreLib", "CoreLib\CoreLib.csproj", "{F783913D-12E0-485A-80AD-FC3DB6D38406}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageBroker", "MessageBroker\MessageBroker.csproj", "{0E5CF075-69B0-4B29-AA55-EC0C5CF57A13}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{F783913D-12E0-485A-80AD-FC3DB6D38406}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F783913D-12E0-485A-80AD-FC3DB6D38406}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F783913D-12E0-485A-80AD-FC3DB6D38406}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E5CF075-69B0-4B29-AA55-EC0C5CF57A13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E5CF075-69B0-4B29-AA55-EC0C5CF57A13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E5CF075-69B0-4B29-AA55-EC0C5CF57A13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E5CF075-69B0-4B29-AA55-EC0C5CF57A13}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
