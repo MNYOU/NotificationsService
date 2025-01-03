@@ -1,13 +1,16 @@
-﻿using MessageBroker.Helpers;
+﻿using JetBrains.Annotations;
+using MessageBroker.Helpers;
 using MessageBroker.Settings;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 
 namespace MessageBroker.Clients.Consumers;
 
+[PublicAPI]
 public abstract class ConsumeClientBase<T> : BackgroundService, IAsyncDisposable where T : class
 {
     private readonly IConnectionFactory connectionFactory;
@@ -19,13 +22,14 @@ public abstract class ConsumeClientBase<T> : BackgroundService, IAsyncDisposable
     private IChannel? channel;
     private IConnection? connection;
 
-    protected ConsumeClientBase(ConsumerOptions consumerOptions, ILogger<ConsumeClientBase<T>> logger, Serializer serializer, IServiceProvider serviceProvider)
+    protected ConsumeClientBase(IOptions<ConsumerOptions> consumerOptions, ILogger<ConsumeClientBase<T>> logger,
+        Serializer serializer, IServiceProvider serviceProvider)
     {
         this.logger = logger;
         this.serializer = serializer;
         this.serviceProvider = serviceProvider;
 
-        this.consumerOptions = consumerOptions;
+        this.consumerOptions = consumerOptions.Value;
         var rabbitOptions = this.consumerOptions.RabbitMqOption;
         connectionFactory = new ConnectionFactory
         {
@@ -55,12 +59,6 @@ public abstract class ConsumeClientBase<T> : BackgroundService, IAsyncDisposable
 
             return channel;
         }
-    }
-
-    public async ValueTask DisposeAsync()
-    {
-        await DisposeAsyncCore();
-        GC.SuppressFinalize(this);
     }
 
     protected override Task ExecuteAsync(CancellationToken stoppingToken)
@@ -97,17 +95,25 @@ public abstract class ConsumeClientBase<T> : BackgroundService, IAsyncDisposable
         await Channel.BasicConsumeAsync(queueName, false, consumer, cancellationToken);
     }
 
-    protected abstract Task<bool> ProcessMessage(T body, IServiceScope scope);
-
     private Task<bool> ProcessMessageInternal(byte[] bytes)
     {
         var body = serializer.Deserialize<T>(bytes);
         if (body is null)
+        {
             return Task.FromResult(false);
+        }
 
         using var scope = serviceProvider.CreateScope();
 
         return ProcessMessage(body, scope);
+    }
+
+    protected abstract Task<bool> ProcessMessage(T body, IServiceScope scope);
+
+    public async ValueTask DisposeAsync()
+    {
+        await DisposeAsyncCore();
+        GC.SuppressFinalize(this);
     }
 
     protected virtual async ValueTask DisposeAsyncCore()
