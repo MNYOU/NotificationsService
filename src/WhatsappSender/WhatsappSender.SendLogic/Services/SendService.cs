@@ -17,14 +17,7 @@ public sealed class SendService(IModelsService modelsService, IWhatsAppBusinessC
     {
         logger.LogInformation("Sending message to: {Recipient}", message.Recipient);
         var sendResult = await SendMessage(message);
-        if (sendResult.IsSuccess)
-        {
-            logger.LogInformation("Successfully sent message to: {Recipient}", message.Recipient);
-        }
-        else
-        {
-            logger.LogError("Failed to send message to: {Recipient}. Error: {Error}", message.Recipient, sendResult.Error);
-        }
+        logger.LogResult(sendResult);
         return sendResult;
     }
 
@@ -140,7 +133,7 @@ public sealed class SendService(IModelsService modelsService, IWhatsAppBusinessC
         }
         catch (WhatsappBusinessCloudAPIException ex)
         {
-            logger.LogInformation("Successfully sent file message via WhatsApp API to: {Recipient}, File: {FileUrl}", 
+            logger.LogError("Successfully sent file message via WhatsApp API to: {Recipient}, File: {FileUrl}", 
                 fileTemplateMessage.To, fileTemplateMessage.Document?.Link);
             return Error.BadRequest($"Не удалось отправить сообщение получателю. " +
                                     $"Ошибка с whatsapp отправлением с типом WhatsappBusinessCloudAPIException. {ex}");
