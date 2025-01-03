@@ -1,34 +1,34 @@
 ﻿using System.Collections.Frozen;
+using Contracts.Sms.Requests;
 using SMSSender.SendLogic.Models.DTO.SendModels;
-using SMSSender.SendLogic.Models.Requests.Send;
 
 namespace SMSSender.SendLogic.Extensions;
 
 internal static class MapperExtensions
 {
-    public static IReadOnlyCollection<SendMessage> ToApplicationMessages(this IEnumerable<SendMessageRequest> requests)
+    public static IReadOnlyCollection<SendMessage> ToApplicationMessages(this IEnumerable<SmsMessageRequest> requests)
     {
         return requests.Select(ToApplicationMessage).ToFrozenSet();
     }
 
-    public static SendMessage ToApplicationMessage(this SendMessageRequest request)
+    public static SendMessage ToApplicationMessage(this SmsMessageRequest request)
     {
         var attachments = request.Attachments.ToApplicationAttachments().ToList();
         return new SendMessage()
         {
-            Sender = request.Sender,
-            Recipient = request.Recipient,
+            Recipient = request.SendRecipient.PhoneNumber,
             Content = request.Content,
             Attachments = attachments
         };
     }
 
-    public static IReadOnlyCollection<SendAttachment> ToApplicationAttachments(this IEnumerable<SendAttachmentRequest> requests)
+    private static IReadOnlyCollection<SendAttachment> ToApplicationAttachments(
+        this IEnumerable<SmsAttachmentRequest> requests)
     {
         return requests.Select(ToApplicationAttachment).ToFrozenSet();
     }
 
-    public static SendAttachment ToApplicationAttachment(this SendAttachmentRequest request)
+    private static SendAttachment ToApplicationAttachment(this SmsAttachmentRequest request)
     {
         return new SendAttachment()
         {

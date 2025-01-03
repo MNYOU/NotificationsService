@@ -9,4 +9,4 @@ public class SendAttachment
     {
         return $"Имя файла: {FileName}, путь к файлу: {FileUrl}";
     }
-} 
+}

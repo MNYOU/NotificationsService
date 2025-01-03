@@ -20,6 +20,12 @@
     <Reference Include="CoreLib">
       <HintPath>..\..\CoreLib\CoreLib\bin\Debug\net8.0\CoreLib.dll</HintPath>
     </Reference>
+    <Reference Include="Contracts">
+      <HintPath>..\..\Contracts\Contracts\bin\Debug\net8.0\Contracts.dll</HintPath>
+    </Reference>
+    <Reference Include="MessageBroker">
+      <HintPath>..\..\CoreLib\MessageBroker\bin\Debug\net8.0\MessageBroker.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

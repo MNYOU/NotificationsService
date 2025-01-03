@@ -6,10 +6,9 @@ using SMSSender.SendLogic.Models.DTO.SendModels;
 using Microsoft.Extensions.Options;
 using SMSC.Types;
 using SMSC.Http;
-using SMSC.Types.Enums;
 using SMSSender.SendLogic.Managers;
 using System.Text;
-using System.Net.Mail;
+using CoreLib.Logging.Extensions;
 
 namespace SMSSender.SendLogic.Services;
 
@@ -23,27 +22,23 @@ public sealed class SendService(IOptions<SMSSettings> settingProvider, ILogger<S
         var providerConfig = new ProviderConfiguration(settings.ApiKey);
         var httpSmsSender = new HttpSms(providerConfig);
         var smsConfig = new SmsConfiguration()
-{
+        {
             Sender = settings.Sender,
         };
         var message = GetMessageBody(smsMessage.Content, smsMessage.Attachments);
-
         OperationResult<SendMessage> result;
-
         try
         {
             var httpSmsResponse = await httpSmsSender.SendSms(smsMessage.Recipient, message, smsConfig);
             result = smsMessage;
-            logger.LogInformation("Successfully sent message to: {Recipient}", smsMessage.Recipient);
         }
         catch (Exception ex)
         {
             result = Error.BadRequest($"Ошибка при отправке сообщения на номер {smsMessage.Recipient} " +
-                $"с телом {message}. {ex.Message}");
-            logger.LogError(ex, "Error sending SMS message to recipients: {Recipient} with message {Content}", 
-                smsMessage.Recipient, result.Error!.Message);
+                                      $"с телом {message}. {ex.Message}");
         }
 
+        logger.LogResult(result);
         return result;
     }
 
@@ -58,16 +53,7 @@ public sealed class SendService(IOptions<SMSSettings> settingProvider, ILogger<S
         }
 
         var batchResult = BatchOperationResult<SendMessage>.FromOperationResults(sendResults);
-        if(batchResult.IsSuccess)
-        {
-            logger.LogInformation("Successfully sent bulk SMS message. Total messages: {MessageCount}", messages.Count);
-        }
-        else
-        {
-            logger.LogWarning("Failed to send bulk SMS message. Error: {ErrorMessage}", 
-                string.Join(", ", batchResult.Errors.Select(x => x.Message)));
-        }
-
+        logger.LogBatchResult(batchResult);
         return batchResult;
     }
 
@@ -88,10 +74,11 @@ public sealed class SendService(IOptions<SMSSettings> settingProvider, ILogger<S
             logger.LogError(ex, "Error while receiving balance.");
             result = $"Ошибка при получении баланса. {ex.Message}";
         }
+
         return result;
     }
 
-    private string GetMessageBody(string content, IEnumerable<SendAttachment> attachments)
+    private static string GetMessageBody(string content, IEnumerable<SendAttachment> attachments)
     {
         var builder = new StringBuilder(content);
 
