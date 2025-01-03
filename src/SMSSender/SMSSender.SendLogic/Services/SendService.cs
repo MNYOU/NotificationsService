@@ -39,7 +39,7 @@ public sealed class SendService(IOptions<SMSSettings> settingProvider, ILogger<S
         catch (Exception ex)
         {
             result = Error.BadRequest($"Ошибка при отправке сообщения на номер {smsMessage.Recipient} " +
-                $"с телом {smsMessage.Content}. {ex.Message}");
+                $"с телом {message}. {ex.Message}");
             logger.LogError(ex, "Error sending SMS message to recipients: {Recipient} with message {Content}", 
                 smsMessage.Recipient, result.Error!.Message);
         }
