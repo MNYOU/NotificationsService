@@ -1,12 +1,9 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+﻿using Microsoft.Extensions.Hosting;
 using Serilog;
 
 namespace CoreLib.Logging.Extensions;
 
-public static class LoggingExtensions
+public static class ServiceCollectionExtensions
 {
     public static IHostBuilder UseCustomizedSerilogLogging(this IHostBuilder hostBuilder)
     {
