@@ -1,5 +1,8 @@
-﻿using EmailSender.Domain.Settings;
+﻿using EmailSender.Api.Consumers;
+using EmailSender.Api.Consumers.Interfaces;
+using EmailSender.Domain.Settings;
 using EmailSender.SendLogic.Extensions;
+using MessageBroker.Extensions;
 
 namespace EmailSender.Api;
 
@@ -25,10 +28,13 @@ public class Startup(IConfiguration configuration)
                     .AllowAnyOrigin();
             });
         });
-        services.AddHttpLogging(_ => { });
-        services.AddLogging(config => config.AddConsole());
         services.Configure<EmailSettings>(configuration.GetSection(nameof(EmailSettings)));
+        services.AddHttpLogging(_ => { });
         services.AddSendLogic();
+        services.AddMessageBrokerServices(configuration);
+        services.AddSimpleConsumer(configuration);
+        services.AddSingleton<IConsumerService, RabbitMqConsumer>();
+        services.AddHostedService<ConsumerServiceInitializer>();
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
