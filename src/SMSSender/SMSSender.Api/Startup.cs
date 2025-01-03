@@ -1,4 +1,7 @@
-﻿using SMSSender.SendLogic.Extensions;
+﻿using MessageBroker.Extensions;
+using SMSSender.Api.Consumers;
+using SMSSender.Api.Consumers.Interfaces;
+using SMSSender.SendLogic.Extensions;
 
 namespace SMSSender.Api;
 
@@ -26,6 +29,10 @@ public class Startup(IConfiguration configuration)
         services.AddHttpLogging(_ => { });
         services.AddLogging(config => config.AddConsole());
         services.AddSendLogic();
+        services.AddMessageBrokerServices(configuration);
+        services.AddSimpleConsumer(configuration);
+        services.AddSingleton<IConsumerService, RabbitMqConsumer>();
+        services.AddHostedService<ConsumerServiceInitializer>();
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
