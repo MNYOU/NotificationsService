@@ -30,4 +30,9 @@ public class OperationResult
     {
         return Failure(error);
     }
+    
+    public override string ToString()
+    {
+        return IsSuccess ? "OperationResult: Success" : $"OperationResult: Failure - Error: {Error?.Message}";
+    }
 }

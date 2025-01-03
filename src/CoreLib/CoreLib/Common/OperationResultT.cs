@@ -39,4 +39,11 @@ public class OperationResult<TResult> : OperationResult
     {
         return Failure(error);
     }
+    
+    public override string ToString()
+    {
+        return IsSuccess 
+            ? $"OperationResult<{typeof(TResult).Name}>: Success - Result: {Result}" 
+            : $"OperationResult<{typeof(TResult).Name}>: Failure - Error: {Error?.Message}";
+    }
 }
