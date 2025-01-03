@@ -29,8 +29,9 @@ public sealed class SendService(IOptions<EmailSettings> settingProvider, ILogger
         {
             result = Error.BadRequest($"Ошибка при отправке сообщения пользователю {emailMessage.Recipient} " +
                                       $"с заголовком {emailMessage.Title} и телом {emailMessage.Content} {ex.Message}");
+            logger.LogError(ex, "Error sending Email to recipients: {Recipient} with message {Content} and title {Title}",
+               emailMessage.Recipient, emailMessage.Content, emailMessage.Title);
         }
-        logger.LogResult(result);
 
         return result;
     }
@@ -58,14 +59,15 @@ public sealed class SendService(IOptions<EmailSettings> settingProvider, ILogger
         try
         {
             await client.SendAsync(message);
+            logger.LogInformation("Successfully sent Email to: {Recipient}", emailMessage.Recipient);
         }
         catch (Exception ex)
         {
             result = Error.BadRequest($"Ошибка при отправке сообщения пользователю {emailMessage.Recipient} " +
                                     $"с заголовком {emailMessage.Title} и телом {emailMessage.Content} {ex.Message}");
+            logger.LogError(ex, "Error sending Email to recipients: {Recipient} with message {Content} and title {Title}",
+               emailMessage.Recipient, emailMessage.Content, emailMessage.Title);
         }
-        
-        logger.LogResult(result);
         return result;
     }
 

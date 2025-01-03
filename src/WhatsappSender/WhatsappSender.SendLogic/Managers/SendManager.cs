@@ -17,7 +17,16 @@ public class SendManager(ISendService sendService, ILogger<SendManager> logger) 
         var sendMessages = messages.ToApplicationMessages();
         logger.LogDebug("Mapped SendMessageRequest to SendMessage. Message count: {Count}", sendMessages.Count);
         var sendResult = await sendService.SendBulk(sendMessages);
-        logger.LogBatchResult(sendResult);
+
+        if (sendResult.IsSuccess)
+        {
+            logger.LogInformation("Successfully sent bulk messages");
+        }
+        else
+        {
+            logger.LogError("Failed to send bulk messages. Errors: {Errors}", sendResult.Errors);
+        }
+
         return sendResult;
     }
 
@@ -27,7 +36,17 @@ public class SendManager(ISendService sendService, ILogger<SendManager> logger) 
         var sendMessage = message.ToApplicationMessage();
         logger.LogDebug("Mapped SendMessageRequest to SendMessage for recipient: {Recipient}", message.Recipient);
         var sendResult = await sendService.Send(sendMessage);
-        logger.LogResult(sendResult);
+
+        if (sendResult.IsSuccess)
+        {
+
+            logger.LogInformation("Successfully sent message to recipient: {Recipient}", message.Recipient);
+        }
+        else
+        {
+            logger.LogError("Failed to send message to recipient: {Recipient}. Error: {Error}", message.Recipient, sendResult.Error);
+        }
+
         return sendResult;
     }
 }

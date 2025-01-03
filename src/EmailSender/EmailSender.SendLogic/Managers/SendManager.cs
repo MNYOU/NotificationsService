@@ -27,7 +27,15 @@ public class SendManager(ISendService sendService, ILogger<SendManager> logger) 
         var sendMessage = message.ToApplicationMessage();
         logger.LogDebug("Mapped SendMessageRequest to SendMessage for recipient: {Recipient}", message.Recipient);
         var sendResult = await sendService.Send(sendMessage);
-        logger.LogResult(sendResult);
+
+        if (sendResult.IsFail)
+        {
+            logger.LogError("Failed to send message to recipient: {Recipient}. Error: {Error}", message.Recipient, sendResult.Error);
+        }
+        else
+        {
+            logger.LogInformation("Successfully sent message to recipient: {Recipient}", message.Recipient);
+        }
         return sendResult;
     }
 }
