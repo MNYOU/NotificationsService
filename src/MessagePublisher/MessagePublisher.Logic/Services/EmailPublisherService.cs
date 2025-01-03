@@ -6,17 +6,19 @@ using MessageBroker.Helpers;
 using MessageBroker.Settings;
 using MessagePublisher.Logic.Interfaces.Services;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace MessagePublisher.Logic.Services;
 
-public class EmailPublisherService : SimplePublishClient, IPublisherService<EmailMessageRequest>
+public class EmailPublisherService(
+    IOptions<PublisherOptions> consumerOptions,
+    IOptions<RabbitMqOption> options,
+    ILogger<EmailPublisherService> logger,
+    Serializer serializer,
+    IServiceProvider serviceProvider)
+    : SimplePublishClient(consumerOptions, options, logger, serializer, serviceProvider),
+        IPublisherService<EmailMessageRequest>
 {
-    protected EmailPublisherService(PublisherOptions consumerOptions, ILogger<EmailPublisherService> logger, 
-        Serializer serializer, IServiceProvider serviceProvider) 
-        : base(consumerOptions, logger, serializer, serviceProvider)
-    {
-    }
-
     public async Task<OperationResult> Publish(EmailMessageRequest body)
     {
         var queueName = QueueConstants.EmailQueueName;

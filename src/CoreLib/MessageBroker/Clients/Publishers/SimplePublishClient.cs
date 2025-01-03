@@ -2,6 +2,7 @@
 using MessageBroker.Helpers;
 using MessageBroker.Settings;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using RabbitMQ.Client;
 
 namespace MessageBroker.Clients.Publishers;
@@ -10,10 +11,11 @@ public class SimplePublishClient : RabbitClientBase, IPublishClient
 {
     private readonly PublisherOptions consumerOptions;
 
-    protected SimplePublishClient(PublisherOptions consumerOptions, ILogger<SimplePublishClient> logger, Serializer serializer, IServiceProvider serviceProvider)
-        : base(consumerOptions.RabbitMqOption, logger, serializer, serviceProvider)
+    protected SimplePublishClient(IOptions<PublisherOptions> consumerOptions, IOptions<RabbitMqOption> options,
+        ILogger<SimplePublishClient> logger, Serializer serializer, IServiceProvider serviceProvider)
+        : base(options, logger, serializer, serviceProvider)
     {
-        this.consumerOptions = consumerOptions;
+        this.consumerOptions = consumerOptions.Value;
     }
 
     public async Task Initialize(string exchange, string type = ExchangeType.Fanout)

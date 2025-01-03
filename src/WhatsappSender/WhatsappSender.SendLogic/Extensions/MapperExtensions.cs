@@ -1,17 +1,17 @@
 ﻿using System.Collections.Frozen;
+using Contracts.WhatsApp.Requests;
 using WhatsappSender.SendLogic.Models.DTO.SendModels;
-using WhatsappSender.SendLogic.Models.Requests.Send;
 
 namespace WhatsappSender.SendLogic.Extensions;
 
 internal static class MapperExtensions
 {
-    public static IReadOnlyCollection<SendMessage> ToApplicationMessages(this IEnumerable<SendMessageRequest> requests)
+    public static IReadOnlyCollection<SendMessage> ToApplicationMessages(this IEnumerable<WhatsAppMessageRequest> requests)
     {
         return requests.Select(ToApplicationMessage).ToFrozenSet();
     }
 
-    public static SendMessage ToApplicationMessage(this SendMessageRequest request)
+    public static SendMessage ToApplicationMessage(this WhatsAppMessageRequest request)
     {
         var attachments = request.Attachments.ToApplicationAttachments().ToList();
         return new SendMessage()
@@ -19,17 +19,17 @@ internal static class MapperExtensions
             Attachments = attachments,
             Title = request.Title,
             Content = request.Content,
-            Recipient = request.Recipient
+            Recipient = request.SendRecipient.PhoneNumber
         };
     }
 
-    public static IReadOnlyCollection<SendAttachment> ToApplicationAttachments(
-        this IEnumerable<SendAttachmentRequest> requests)
+    private static IReadOnlyCollection<SendAttachment> ToApplicationAttachments(
+        this IEnumerable<WhatsAppAttachmentRequest> requests)
     {
         return requests.Select(ToApplicationAttachment).ToFrozenSet();
     }
 
-    public static SendAttachment ToApplicationAttachment(this SendAttachmentRequest request)
+    private static SendAttachment ToApplicationAttachment(this WhatsAppAttachmentRequest request)
     {
         return new SendAttachment()
         {

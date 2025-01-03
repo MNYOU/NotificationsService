@@ -1,21 +1,21 @@
-﻿using Contracts.WhatsApp.Requests;
-using WhatsappSender.Api.Consumers.Interfaces;
-using WhatsappSender.SendLogic.Interfaces.Managers;
+﻿using Contracts.Email.Requests;
+using EmailSender.Api.Consumers.Interfaces;
+using EmailSender.SendLogic.Interfaces.Managers;
 using MessageBroker.Clients.Consumers;
 using MessageBroker.Helpers;
 using MessageBroker.Settings;
 using Microsoft.Extensions.Options;
 
-namespace WhatsappSender.Api.Consumers;
+namespace EmailSender.Api.Consumers;
 
 public class RabbitMqConsumer(
     IOptions<ConsumerOptions> consumerOptions,
-    ILogger<ConsumeClientBase<WhatsAppMessageRequest>> logger,
+    ILogger<ConsumeClientBase<EmailMessageRequest>> logger,
     Serializer serializer,
     IServiceProvider serviceProvider)
-    : ConsumeClientBase<WhatsAppMessageRequest>(consumerOptions, logger, serializer, serviceProvider), IConsumerService
+    : ConsumeClientBase<EmailMessageRequest>(consumerOptions, logger, serializer, serviceProvider), IConsumerService
 {
-    protected override async Task<bool> ProcessMessage(WhatsAppMessageRequest body, IServiceScope scope)
+    protected override async Task<bool> ProcessMessage(EmailMessageRequest body, IServiceScope scope)
     {
         var sendManager = scope.ServiceProvider.GetRequiredService<ISendManager>();
         var result = await sendManager.SendMessage(body);

@@ -13,6 +13,9 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Reference Include="Contracts">
+        <HintPath>..\..\Contracts\Contracts\bin\Debug\net8.0\Contracts.dll</HintPath>
+      </Reference>
       <Reference Include="CoreLib">
         <HintPath>..\..\CoreLib\CoreLib\bin\Debug\net8.0\CoreLib.dll</HintPath>
       </Reference>

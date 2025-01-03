@@ -1,6 +1,7 @@
 ﻿using MessageBroker.Helpers;
 using MessageBroker.Settings;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using RabbitMQ.Client;
 
 namespace MessageBroker.Clients.Base;
@@ -12,14 +13,15 @@ public abstract class RabbitClientBase
     private IChannel? channel;
     private IConnection? connection;
 
-    protected RabbitClientBase(RabbitMqOption options, ILogger<RabbitClientBase> logger, Serializer serializer,
+    protected RabbitClientBase(IOptions<RabbitMqOption> options, ILogger<RabbitClientBase> logger,
+        Serializer serializer,
         IServiceProvider serviceProvider)
     {
         Logger = logger;
         Serializer = serializer;
         ServiceProvider = serviceProvider;
 
-        RabbitMqOption = options;
+        RabbitMqOption = options.Value;
         connectionFactory = new ConnectionFactory
         {
             HostName = RabbitMqOption.HostName,

@@ -8,6 +8,7 @@
 
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.3"/>
+        <PackageReference Include="RabbitMQ.Client" Version="7.0.0" />
         <PackageReference Include="Serilog" Version="4.2.0" />
         <PackageReference Include="Serilog.AspNetCore" Version="8.0.3" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
@@ -18,9 +19,15 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Reference Include="CoreLib">
-        <HintPath>..\..\CoreLib\CoreLib\bin\Debug\net8.0\CoreLib.dll</HintPath>
-      </Reference>
+        <Reference Include="CoreLib">
+            <HintPath>..\..\CoreLib\CoreLib\bin\Debug\net8.0\CoreLib.dll</HintPath>
+        </Reference>
+        <Reference Include="Contracts">
+            <HintPath>..\..\Contracts\Contracts\bin\Debug\net8.0\Contracts.dll</HintPath>
+        </Reference>
+        <Reference Include="MessageBroker">
+            <HintPath>..\..\CoreLib\MessageBroker\bin\Debug\net8.0\MessageBroker.dll</HintPath>
+        </Reference>
     </ItemGroup>
 
 </Project>

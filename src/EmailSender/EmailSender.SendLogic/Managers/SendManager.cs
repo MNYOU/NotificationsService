@@ -1,17 +1,17 @@
-﻿using CoreLib.Common;
+﻿using Contracts.Email.Requests;
+using CoreLib.Common;
 using CoreLib.Logging.Extensions;
 using EmailSender.SendLogic.Extensions;
 using EmailSender.SendLogic.Interfaces.Managers;
 using EmailSender.SendLogic.Interfaces.Services;
 using EmailSender.SendLogic.Models.DTO.SendModels;
-using EmailSender.SendLogic.Models.Requests.Send;
 using Microsoft.Extensions.Logging;
 
 namespace EmailSender.SendLogic.Managers;
 
 public class SendManager(ISendService sendService, ILogger<SendManager> logger) : ISendManager
 {
-    public async Task<BatchOperationResult<SendMessage>> SendBulk(ICollection<SendMessageRequest> messages)
+    public async Task<BatchOperationResult<SendMessage>> SendBulk(ICollection<EmailMessageRequest> messages)
     {
         logger.LogInformation("Received bulk send messages request. Message count: {Count}", messages.Count);
         var sendMessages = messages.ToApplicationMessages();
@@ -21,11 +21,11 @@ public class SendManager(ISendService sendService, ILogger<SendManager> logger) 
         return sendResult;
     }
     
-    public async Task<OperationResult<SendMessage>> SendMessage(SendMessageRequest message)
+    public async Task<OperationResult<SendMessage>> SendMessage(EmailMessageRequest message)
     {
-        logger.LogInformation("Received send message request for recipient: {Recipient}", message.Recipient);
+        logger.LogInformation("Received send message request for recipient: {Recipient}", message.SendRecipient.Email);
         var sendMessage = message.ToApplicationMessage();
-        logger.LogDebug("Mapped SendMessageRequest to SendMessage for recipient: {Recipient}", message.Recipient);
+        logger.LogDebug("Mapped SendMessageRequest to SendMessage for recipient: {Recipient}", sendMessage.Recipient);
         var sendResult = await sendService.Send(sendMessage);
 
         if (sendResult.IsFail)
