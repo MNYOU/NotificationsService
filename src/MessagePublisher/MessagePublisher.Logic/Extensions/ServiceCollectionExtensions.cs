@@ -1,4 +1,7 @@
-﻿using MessagePublisher.Logic.Interfaces.Managers;
+﻿using Contracts.Email.Requests;
+using Contracts.Sms.Requests;
+using Contracts.WhatsApp.Requests;
+using MessagePublisher.Logic.Interfaces.Managers;
 using MessagePublisher.Logic.Interfaces.Services;
 using MessagePublisher.Logic.Managers;
 using MessagePublisher.Logic.Services;
@@ -10,10 +13,9 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddPublisherServices(this IServiceCollection services)
     {
-        services.AddScoped<IPublisherService, WhatsAppPublisherService>();
-        services.AddScoped<IPublisherService, EmailPublisherService>();
-        services.AddScoped<IPublisherService, SmsPublisherService>();
-
+        services.AddScoped<IPublisherService<WhatsAppMessageRequest>, WhatsAppPublisherService>();
+        services.AddScoped<IPublisherService<EmailMessageRequest>, EmailPublisherService>();
+        services.AddScoped<IPublisherService<SmsMessageRequest>, SmsPublisherService>();
         services.AddScoped<ISendManager, SendManager>();
 
         return services;

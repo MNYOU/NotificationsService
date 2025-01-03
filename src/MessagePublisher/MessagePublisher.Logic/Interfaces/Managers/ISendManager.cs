@@ -1,5 +1,5 @@
-﻿using CoreLib.Common;
-using MessagePublisher.Logic.Models.Requests.Send;
+﻿using Contracts.Publisher.Requests;
+using CoreLib.Common;
 
 namespace MessagePublisher.Logic.Interfaces.Managers;
 

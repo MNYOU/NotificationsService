@@ -1,20 +1,26 @@
-﻿using CoreLib.Common;
+﻿using Contracts.Email.Requests;
+using Contracts.Publisher.Requests;
+using Contracts.Sms.Requests;
+using Contracts.WhatsApp.Requests;
+using CoreLib.Common;
 using MessagePublisher.Logic.Interfaces.Managers;
 using MessagePublisher.Logic.Interfaces.Services;
-using MessagePublisher.Logic.Models.Requests.Send;
+using MessagePublisher.Logic.Mappers;
 
 namespace MessagePublisher.Logic.Managers;
 
-public class SendManager(IEnumerable<IPublisherService> publisherServices) : ISendManager
+public class SendManager(
+    IEnumerable<IPublisherManager> publisherManagers) 
+    : ISendManager
 {
     public async Task<OperationResult> Send(SendMessageRequest request)
     {
         var results = new List<OperationResult>();
+        var sendMessages = request.ToSendMessage();
 
-        foreach (var publisher in publisherServices)
+        foreach (var publisherManager in publisherManagers)
         {
-            var result = await publisher.Publish(request);
-            results.Add(result);
+            results.Add(await publisherManager.Send(sendMessages));
         }
 
         if (!results.Any(x => x.IsFail))

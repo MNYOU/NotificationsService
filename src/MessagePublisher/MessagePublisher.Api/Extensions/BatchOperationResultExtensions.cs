@@ -1,6 +1,4 @@
-﻿using System.Runtime.InteropServices.JavaScript;
-using CoreLib.Common;
-using EmailSender.Core.Common;
+﻿using CoreLib.Common;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MessagePublisher.Api.Extensions;
