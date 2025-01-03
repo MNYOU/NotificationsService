@@ -1,11 +1,7 @@
-﻿using CoreLib.Logging.Extensions;
-using WhatsappSender.Api.Subscriptions;
-using WhatsappSender.Api.Consumers;
-using WhatsappSender.Api.Consumers.Interfaces;
-using WhatsappSender.Api.Consumers.Options;
-using WhatsappSender.SendLogic.Extensions;
+﻿using MessagePublisher.Logic.Extensions;
+using MessagePublisher.Logic.Models.Options;
 
-namespace WhatsappSender.Api;
+namespace MessagePublisher.Api;
 
 public class Startup(IConfiguration configuration)
 {
@@ -29,11 +25,10 @@ public class Startup(IConfiguration configuration)
             });
         });
         services.AddHttpLogging(_ => { });
-        services.AddSendLogic(configuration);
-        services.AddScoped<IRabbitMqSubscriber, RabbitMqSubscriber>();
+        services.AddLogging(config => config.AddConsole());
         services.Configure<RabbitMqOption>(configuration.GetSection(nameof(RabbitMqOption)));
-        services.AddScoped<IConsumerService, RabbitMqConsumer>();
-        services.AddHostedService<ConsumerServiceInitializer>();
+        services.AddPublisherServices();
+        services.AddHostedService<PublisherServiceInitializer>();
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -45,6 +40,7 @@ public class Startup(IConfiguration configuration)
             app.UseSwagger();
             app.UseSwaggerUI();
         }
+
         app.UseHttpsRedirection();
         app.UseCors("default");
         app.UseRouting();

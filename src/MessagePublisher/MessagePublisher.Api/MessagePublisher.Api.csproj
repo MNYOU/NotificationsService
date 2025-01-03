@@ -8,20 +8,11 @@
 
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.3"/>
-        <PackageReference Include="RabbitMQ.Client" Version="7.0.0" />
-        <PackageReference Include="Serilog.AspNetCore" Version="8.0.3" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\WhatsappSender.Core\WhatsappSender.Core.csproj" />
-      <ProjectReference Include="..\WhatsappSender.SendLogic\WhatsappSender.SendLogic.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Reference Include="CoreLib">
-        <HintPath>..\..\CoreLib\CoreLib\bin\Debug\net8.0\CoreLib.dll</HintPath>
-      </Reference>
+      <ProjectReference Include="..\MessagePublisher.Logic\MessagePublisher.Logic.csproj" />
     </ItemGroup>
 
     <ItemGroup>
